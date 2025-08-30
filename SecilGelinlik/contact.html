@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Randevu / İletişim</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <h1>Randevu Al</h1>
+  <a href="index.html">Anasayfa</a>
+</header>
+
+<section class="contact-section">
+  <div class="contact-form">
+    <form action="mailto:info@gelinlik.com" method="post" enctype="text/plain">
+      <div class="form-group">
+        <input type="text" name="name" required>
+        <label>Ad Soyad</label>
+      </div>
+      <div class="form-group">
+        <input type="tel" name="phone" required>
+        <label>Telefon</label>
+      </div>
+      <div class="form-group">
+        <textarea name="message" required></textarea>
+        <label>Mesaj</label>
+      </div>
+      <button type="submit" class="btn">Gönder</button>
+    </form>
+  </div>
+
+  <div class="contact-info">
+    <p>Adres: Edirne Keşan</p>
+    <p>Telefon: +90 555 555 55 55</p>
+    <p><a href="https://wa.me/905555555555">WhatsApp ile Randevu</a></p>
+  </div>
+</section>
+
+<script src="js/main.js"></script>
+</body>
+</html>
