@@ -22,3 +22,9 @@ window.addEventListener('scroll', () => {
     hero.style.backgroundPositionY = -(scroll * 0.3) + 'px';
   }
 });
+const hamburger = document.querySelector('.hamburger');
+const nav = document.querySelector('.nav');
+
+hamburger.addEventListener('click', () => {
+  nav.classList.toggle('open');
+});

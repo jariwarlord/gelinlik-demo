@@ -3,42 +3,79 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Randevu / İletişim</title>
+  <title>Randevu / İletişim | Secil Gelinlik</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<header>
-  <h1>Randevu Al</h1>
-  <a href="index.html">Anasayfa</a>
+<!-- Header -->
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo">Secil Gelinlik</a>
+    <nav class="nav">
+      <ul>
+        <li><a href="index.html">Anasayfa</a></li>
+        <li><a href="gallery.html">Koleksiyon</a></li>
+        <li><a href="contact.html" class="active">Randevu</a></li>
+      </ul>
+    </nav>
+    <div class="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
 </header>
 
-<section class="contact-section">
-  <div class="contact-form">
+<!-- Hero Section -->
+<section class="hero-contact">
+  <div class="hero-overlay"></div>
+  <div class="contact-card">
+    <h1>Randevu Alın</h1>
+    <p>Hayalinizdeki gelinliği birlikte tasarlayalım</p>
+
+    <!-- Contact Form -->
     <form action="mailto:info@gelinlik.com" method="post" enctype="text/plain">
       <div class="form-group">
-        <input type="text" name="name" required>
+        <input type="text" name="name" required placeholder=" ">
         <label>Ad Soyad</label>
       </div>
       <div class="form-group">
-        <input type="tel" name="phone" required>
+        <input type="tel" name="phone" required placeholder=" ">
         <label>Telefon</label>
       </div>
       <div class="form-group">
-        <textarea name="message" required></textarea>
+        <textarea name="message" required placeholder=" "></textarea>
         <label>Mesaj</label>
       </div>
       <button type="submit" class="btn">Gönder</button>
     </form>
-  </div>
 
-  <div class="contact-info">
-    <p>Adres: Edirne Keşan</p>
-    <p>Telefon: +90 555 555 55 55</p>
-    <p><a href="https://wa.me/905555555555">WhatsApp ile Randevu</a></p>
+    <div class="contact-info">
+      <p>Adres: Edirne Keşan</p>
+      <p>Telefon: +90 555 555 55 55</p>
+      <p><a href="https://wa.me/905555555555" target="_blank">WhatsApp ile Randevu</a></p>
+    </div>
   </div>
 </section>
 
-<script src="js/main.js"></script>
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-left">
+      <h3>Secil Gelinlik</h3>
+      <p>10 yıldır hayallerinizi süsleyen gelinlikler tasarlıyoruz.</p>
+    </div>
+    <div class="footer-right">
+      <p>İletişim:</p>
+      <p>info@gelinlik.com | +90 555 555 55 55</p>
+      <div class="social-icons">
+        <a href="#"><img src="images/instagram.png" alt="Instagram"></a>
+        <a href="#"><img src="images/facebook.png" alt="Facebook"></a>
+        <a href="https://wa.me/905555555555"><img src="https://images.unsplash.com/photo-1636751364472-12bfad09b451?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d2hhdHNhcHB8ZW58MHx8MHx8fDA%3D" alt="WhatsApp"></a>
+      </div>
+    </div>
+  </div>
+  <p class="copyright">© 2025 Secil Gelinlik</p>
+</footer>
+
 </body>
 </html>
