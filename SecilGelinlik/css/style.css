@@ -391,3 +391,89 @@ footer a:hover { color:#ff3b61; text-decoration:underline; }
   background: linear-gradient(to bottom, #fff0f0, #ffe8e8);
   text-align: center;
 }
+.map-container {
+  width: 70%;
+  max-width: 1200px;
+  margin: 40px auto;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+section.map {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+section.map h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #ff6b81;
+}
+.lightbox-overlay {
+  position: fixed;
+  top:0; left:0; right:0; bottom:0;
+  background: rgba(0,0,0,0.8);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index: 2000;
+  opacity:0;
+  pointer-events:none;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox-overlay.active {
+  opacity:1;
+  pointer-events:auto;
+}
+
+.lightbox-overlay img {
+  max-width:90%;
+  max-height:80vh;
+  border-radius:10px;
+  box-shadow:0 0 30px rgba(0,0,0,0.6);
+  animation: fadeIn 0.4s ease;
+}
+/* Lightbox kapatma butonu */
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  z-index: 2100; /* overlay içindeki resimden önde olsun */
+}
+
+.lightbox-close:hover {
+  transform: scale(1.2);
+  color: #ff6b81; /* hover rengini pembe yaptık */
+}
+.whatsapp-float {
+  background: #25D366;
+  padding: 12px;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+   transition: transform 0.3s, background 0.3s;
+}
+
+.whatsapp-float img {
+  width: 25px;
+  height: 25px;
+  display: block;
+}
+
+.whatsapp-float:hover {
+  background: #20b358;
+  transform: scale(1.1);
+}
+.logo-text {
+  font-family: 'Dancing Script', cursive;
+  font-weight: 600; 
+  font-size: 2rem;
+  color: #FF6F91;  
+}

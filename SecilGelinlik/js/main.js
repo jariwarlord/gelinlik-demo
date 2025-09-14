@@ -28,3 +28,34 @@ const nav = document.querySelector('.nav');
 hamburger.addEventListener('click', () => {
   nav.classList.toggle('open');
 });
+// Lightbox
+const lightboxLinks = document.querySelectorAll('.lightbox');
+const overlay = document.createElement('div');
+overlay.classList.add('lightbox-overlay');
+document.body.appendChild(overlay);
+
+const overlayImg = document.createElement('img');
+overlay.appendChild(overlayImg);
+
+// Çarpı butonu
+const closeBtn = document.createElement('span');
+closeBtn.classList.add('lightbox-close');
+closeBtn.innerHTML = '&times;'; // X sembolü
+overlay.appendChild(closeBtn);
+
+lightboxLinks.forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    overlayImg.src = link.href;
+    overlay.classList.add('active');
+  });
+});
+
+// Overlay kapatma
+closeBtn.addEventListener('click', () => {
+  overlay.classList.remove('active');
+});
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") overlay.classList.remove("active");
+  });
