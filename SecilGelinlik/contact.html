@@ -33,28 +33,21 @@
     <p>Hayalinizdeki gelinliği birlikte tasarlayalım</p>
 
     <!-- Contact Form -->
-    <form action="mailto:info@gelinlik.com" method="post" enctype="text/plain">
-      <div class="form-group">
-        <input type="text" name="name" required placeholder=" ">
-        <label>Ad Soyad</label>
-      </div>
-      <div class="form-group">
-        <input type="tel" name="phone" required placeholder=" ">
-        <label>Telefon</label>
-      </div>
-      <div class="form-group">
-        <textarea name="message" required placeholder=" "></textarea>
-        <label>Mesaj</label>
-      </div>
-      <button type="submit" class="btn">Gönder</button>
-    </form>
-
-    <div class="contact-info">
-      <p>Adres: Edirne Keşan</p>
-      <p>Telefon: +90 544 178 62 44</p>
-      <p><a href="https://wa.me/+90 544 178 62 44" target="_blank">WhatsApp ile Randevu</a></p>
-    </div>
+    <form id="whatsappForm" autocomplete="on" novalidate>
+  <div class="form-group">
+    <input type="text" id="name" name="name" required placeholder=" ">
+    <label for="name">Ad Soyad</label>
   </div>
+  <div class="form-group">
+    <input type="tel" id="phone" name="phone" required placeholder=" ">
+    <label for="phone">Telefon</label>
+  </div>
+  <div class="form-group">
+    <textarea id="message" name="message" required placeholder=" "></textarea>
+    <label for="message">Mesaj</label>
+  </div>
+  <button type="submit" class="btn">Gönder</button>
+</form>
 </section>
 <!-- Footer -->
 <footer class="site-footer">
