@@ -529,3 +529,66 @@ section.map h2 {
 .col-item:hover img {
   transform: scale(1.05);
 }
+/* Genel iyileştirmeler */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Küçük ekranlarda (tablet ve telefon) */
+@media (max-width: 768px) {
+  /* Menü */
+  .nav ul {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    background: #fff;
+    padding: 20px;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-radius: 8px;
+  }
+
+  .nav.open ul {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  /* Hero */
+  .hero {
+    height: 60vh;
+    padding: 0 15px;
+  }
+  .hero-text h1 {
+    font-size: 1.8rem;
+  }
+  .hero-text p {
+    font-size: 1rem;
+  }
+
+  /* Koleksiyon görselleri */
+  .col-item img {
+    height: 220px; /* daha kısa sabit yükseklik */
+  }
+}
+
+/* Çok küçük ekranlar (480px altı) */
+@media (max-width: 480px) {
+  .hero {
+    height: 50vh;
+  }
+  .hero-text h1 {
+    font-size: 1.5rem;
+  }
+  .hero-text p {
+    font-size: 0.9rem;
+  }
+  .col-item img {
+    height: 180px;
+  }
+}
