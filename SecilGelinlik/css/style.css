@@ -592,3 +592,12 @@ img {
     height: 180px;
   }
 }
+.btn {
+  padding: 10px 40px;
+  background: linear-gradient(45deg,#f9c0c0,#ff6b81);
+  color: white;
+  border-radius: 50px;
+  font-weight: bold;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  white-space: nowrap; /* Tek satırda kal */
+}
