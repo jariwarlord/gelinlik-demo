@@ -391,3 +391,213 @@ footer a:hover { color:#ff3b61; text-decoration:underline; }
   background: linear-gradient(to bottom, #fff0f0, #ffe8e8);
   text-align: center;
 }
+.map-container {
+  width: 70%;
+  max-width: 1200px;
+  margin: 40px auto;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+section.map {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+section.map h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #ff6b81;
+}
+.lightbox-overlay {
+  position: fixed;
+  top:0; left:0; right:0; bottom:0;
+  background: rgba(0,0,0,0.8);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index: 2000;
+  opacity:0;
+  pointer-events:none;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox-overlay.active {
+  opacity:1;
+  pointer-events:auto;
+}
+
+.lightbox-overlay img {
+  max-width:90%;
+  max-height:80vh;
+  border-radius:10px;
+  box-shadow:0 0 30px rgba(0,0,0,0.6);
+  animation: fadeIn 0.4s ease;
+}
+/* Lightbox kapatma butonu */
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  z-index: 2100; /* overlay içindeki resimden önde olsun */
+}
+
+.lightbox-close:hover {
+  transform: scale(1.2);
+  color: #ff6b81; /* hover rengini pembe yaptık */
+}
+.whatsapp-float {
+  background: #25D366;
+  padding: 12px;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+   transition: transform 0.3s, background 0.3s;
+}
+
+.whatsapp-float img {
+  width: 25px;
+  height: 25px;
+  display: block;
+}
+
+.whatsapp-float:hover {
+  background: #20b358;
+  transform: scale(1.1);
+}
+.logo-text {
+  font-family: 'Dancing Script', cursive;
+  font-weight: 600; 
+  font-size: 2rem;
+  color: #FF6F91;  
+}
+.hero {
+  position: relative;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 1s ease-in-out;
+}
+
+.hero-overlay {
+  position: absolute;
+  top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 1;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  animation: fadeInUp 1.2s ease-in-out;
+}
+
+.hero-text h1 { font-size: 3rem; margin-bottom: 15px; }
+.hero-text p { margin-bottom: 20px; font-size: 1.2rem; }
+
+@keyframes fadeInUp {
+  from { opacity:0; transform:translateY(40px);}
+  to { opacity:1; transform:translateY(0);}
+}
+
+.collection-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.col-item img {
+  width: 100%;
+  height: 350px;       /* sabit yükseklik */
+  object-fit: cover;   /* kırpma yaparak kutuya oturt */
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.col-item:hover img {
+  transform: scale(1.05);
+}
+/* Genel iyileştirmeler */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Küçük ekranlarda (tablet ve telefon) */
+@media (max-width: 768px) {
+  /* Menü */
+  .nav ul {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    background: #fff;
+    padding: 20px;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-radius: 8px;
+  }
+
+  .nav.open ul {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  /* Hero */
+  .hero {
+    height: 60vh;
+    padding: 0 15px;
+  }
+  .hero-text h1 {
+    font-size: 1.8rem;
+  }
+  .hero-text p {
+    font-size: 1rem;
+  }
+
+  /* Koleksiyon görselleri */
+  .col-item img {
+    height: 220px; /* daha kısa sabit yükseklik */
+  }
+}
+
+/* Çok küçük ekranlar (480px altı) */
+@media (max-width: 480px) {
+  .hero {
+    height: 50vh;
+  }
+  .hero-text h1 {
+    font-size: 1.5rem;
+  }
+  .hero-text p {
+    font-size: 0.9rem;
+  }
+  .col-item img {
+    height: 180px;
+  }
+}
+.btn {
+  padding: 10px 40px;
+  background: linear-gradient(45deg,#f9c0c0,#ff6b81);
+  color: white;
+  border-radius: 50px;
+  font-weight: bold;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  white-space: nowrap; /* Tek satırda kal */
+}

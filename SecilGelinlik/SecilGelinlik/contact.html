@@ -24,6 +24,16 @@
     </div>
   </div>
 </header>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7HH12N5P20"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7HH12N5P20');
+</script>
+
 
 <!-- Hero Section -->
 <section class="hero-contact">
@@ -33,30 +43,22 @@
     <p>Hayalinizdeki gelinliği birlikte tasarlayalım</p>
 
     <!-- Contact Form -->
-    <form action="mailto:info@gelinlik.com" method="post" enctype="text/plain">
-      <div class="form-group">
-        <input type="text" name="name" required placeholder=" ">
-        <label>Ad Soyad</label>
-      </div>
-      <div class="form-group">
-        <input type="tel" name="phone" required placeholder=" ">
-        <label>Telefon</label>
-      </div>
-      <div class="form-group">
-        <textarea name="message" required placeholder=" "></textarea>
-        <label>Mesaj</label>
-      </div>
-      <button type="submit" class="btn">Gönder</button>
-    </form>
-
-    <div class="contact-info">
-      <p>Adres: Edirne Keşan</p>
-      <p>Telefon: +90 555 555 55 55</p>
-      <p><a href="https://wa.me/905555555555" target="_blank">WhatsApp ile Randevu</a></p>
-    </div>
+    <form id="whatsappForm" autocomplete="on" novalidate>
+  <div class="form-group">
+    <input type="text" id="name" name="name" required placeholder=" ">
+    <label for="name">Ad Soyad</label>
   </div>
+  <div class="form-group">
+    <input type="tel" id="phone" name="phone" required placeholder=" ">
+    <label for="phone">Telefon</label>
+  </div>
+  <div class="form-group">
+    <textarea id="message" name="message" required placeholder=" "></textarea>
+    <label for="message">Mesaj</label>
+  </div>
+  <button type="submit" class="btn">Gönder</button>
+</form>
 </section>
-
 <!-- Footer -->
 <footer class="site-footer">
   <div class="container">
@@ -66,12 +68,13 @@
     </div>
     <div class="footer-right">
       <p>İletişim:</p>
-      <p>info@gelinlik.com | +90 555 555 55 55</p>
+      <p>info@gelinlik.com | +90 544 178 62 44</p>
       <div class="social-icons">
-        <a href="#"><img src="images/instagram.png" alt="Instagram"></a>
-        <a href="#"><img src="images/facebook.png" alt="Facebook"></a>
-        <a href="https://wa.me/905555555555"><img src="https://images.unsplash.com/photo-1636751364472-12bfad09b451?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d2hhdHNhcHB8ZW58MHx8MHx8fDA%3D" alt="WhatsApp"></a>
-      </div>
+  <a href="https://www.instagram.com/secil_gelinlik_kesan/"><img src="images/instagram.png" alt="Instagram"></a>
+  <a href="https://www.facebook.com/secilgelinlikkesan/"><img src="images/facebook.png" alt="Facebook"></a>
+  <a href="https://wa.me/905441726244?text=Merhaba%20randevu%20almak%20istiyorum" target="_blank" class="whatsapp-float">
+  <img src="images/whatsapp.png" alt="WhatsApp">
+</a>
     </div>
   </div>
   <p class="copyright">© 2025 Secil Gelinlik</p>
