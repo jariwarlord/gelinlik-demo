@@ -1,0 +1,46 @@
+---
+const reviews = [
+  {
+    name: 'Merve Kaya',
+    avatar:
+      'https://images.unsplash.com/photo-1701615004837-40d8573b6652?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D',
+    timeAgo: '3 ay önce',
+    body: 'İlgi ve alaka gerçekten harikaydı. Gelinliğim tam istediğim gibi oldu, herkese tavsiye ederim.',
+  },
+  {
+    name: 'Büşra Demir',
+    avatar:
+      'https://plus.unsplash.com/premium_photo-1691784781482-9af9bce05096?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzV8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D',
+    timeAgo: '6 ay önce',
+    body: 'Provalarda çok yardımcı oldular, en ufak detaya kadar ilgilendiler. Çok memnun kaldım, teşekkürler!',
+  },
+  {
+    name: 'Elif Yıldız',
+    avatar:
+      'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D',
+    timeAgo: '1 yıl önce',
+    body: 'Arkadaşımın tavsiyesiyle geldim. Hizmet çok profesyonel, gelinlik modelleri de çok çeşit. Kesinlikle güvenilir.',
+  },
+];
+---
+
+<section class="google-reviews">
+  <h2>Müşteri Yorumları</h2>
+  <div class="reviews">
+    {
+      reviews.map((review) => (
+        <div class="review">
+          <div class="review-header">
+            <img src={review.avatar} alt={review.name} class="avatar" />
+            <div class="review-info">
+              <h3>{review.name}</h3>
+              <span>{review.timeAgo}</span>
+              <div class="stars">★★★★★</div>
+            </div>
+          </div>
+          <p>{review.body}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>

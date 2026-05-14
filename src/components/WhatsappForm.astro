@@ -1,0 +1,56 @@
+---
+interface Props {
+  whatsappNumber?: string;
+}
+
+const { whatsappNumber = '905441726244' } = Astro.props;
+---
+
+<form id="whatsappForm" autocomplete="on" novalidate data-whatsapp={whatsappNumber}>
+  <div class="form-group">
+    <input type="text" id="name" name="name" required placeholder=" " />
+    <label for="name">Ad Soyad</label>
+  </div>
+  <div class="form-group">
+    <input type="tel" id="phone" name="phone" required placeholder=" " />
+    <label for="phone">Telefon</label>
+  </div>
+  <div class="form-group">
+    <textarea id="message" name="message" required placeholder=" "></textarea>
+    <label for="message">Mesaj</label>
+  </div>
+  <button type="submit" class="btn">Gönder</button>
+</form>
+
+<script>
+  const form = document.getElementById('whatsappForm') as HTMLFormElement | null;
+
+  if (form) {
+    const WA_NUMBER = form.dataset.whatsapp || '905441726244';
+    const encode = (str: string) => encodeURIComponent(str).replace(/%20/g, '%20');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = (document.getElementById('name') as HTMLInputElement).value.trim();
+      const phone = (document.getElementById('phone') as HTMLInputElement).value.trim();
+      const message = (document.getElementById('message') as HTMLTextAreaElement).value.trim();
+
+      if (!name || !phone || !message) {
+        alert('Lütfen tüm alanları doldurun.');
+        return;
+      }
+
+      const text =
+        `Merhaba, randevu almak istiyorum.%0A` +
+        `Ad Soyad: ${encode(name)}%0A` +
+        `Telefon: ${encode(phone)}%0A` +
+        `Mesaj: ${encode(message)}`;
+
+      const url = `https://wa.me/${WA_NUMBER}?text=${text}`;
+
+      const win = window.open(url, '_blank');
+      if (!win) window.location.href = url;
+    });
+  }
+</script>

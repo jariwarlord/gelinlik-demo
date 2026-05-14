@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroContact from '../components/HeroContact.astro';
+import WhatsappForm from '../components/WhatsappForm.astro';
+---
+
+<BaseLayout
+  title="Randevu / İletişim | Secil Gelinlik"
+  activeNav="contact"
+  footerVariant="contact"
+>
+  <HeroContact title="Randevu Alın" subtitle="Hayalinizdeki gelinliği birlikte tasarlayalım">
+    <WhatsappForm whatsappNumber="905441726244" />
+  </HeroContact>
+</BaseLayout>

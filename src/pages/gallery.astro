@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroGallery from '../components/HeroGallery.astro';
+import CollectionGrid from '../components/CollectionGrid.astro';
+
+const altByIndex: Record<number, string> = {
+  1: 'Keşan gelinlik modelleri - dantel tasarım',
+  2: 'Keşan gelinlik modelleri - dantel tasarım',
+  3: 'Seçil Gelinlik Keşan - özel tasarım abiye',
+  4: 'Seçil Gelinlik Keşan - özel tasarım abiye',
+  5: 'Keşan gelinlik modelleri - dantel tasarım',
+  6: 'Seçil Gelinlik Keşan',
+  7: 'Keşan gelinlik modelleri',
+  8: 'Keşan gelinlik modelleri',
+  9: 'Keşan gelinlik modelleri',
+  10: 'Seçil Gelinlik Keşan',
+  11: "Keşan'da gelinlik",
+  12: 'Seçil Gelinlik Keşan',
+  13: 'Keşan gelinlik modelleri',
+  14: 'Seçil Gelinlik Keşan',
+  15: 'Seçil Gelinlik Keşan',
+  16: 'Keşan gelinlik modelleri',
+  17: 'Keşan gelinlik modelleri ',
+  18: 'Seçil Gelinlik Keşan',
+  19: 'Seçil Gelinlik Keşan',
+  20: 'Seçil Gelinlik Keşan',
+  21: 'Keşan gelinlik modelleri',
+  22: 'Keşan gelinlik modelleri',
+  23: 'Keşan gelinlik modelleri',
+  24: 'Keşan gelinlik modelleri',
+  25: 'Seçil Gelinlik Keşan',
+};
+
+const items = Array.from({ length: 25 }, (_, i) => {
+  const n = i + 1;
+  return {
+    src: `/images/${n}.jpg`,
+    alt: altByIndex[n] ?? 'Seçil Gelinlik Keşan',
+    title: `Model ${n}`,
+  };
+});
+---
+
+<BaseLayout title="Koleksiyon | Secil Gelinlik" activeNav="gallery" footerVariant="minimal">
+  <HeroGallery title="Tüm Gelinlik Koleksiyonumuz" subtitle="Beğendiğiniz modeli seçin" />
+  <CollectionGrid title="Tüm Koleksiyon" items={items} lightbox={true} />
+</BaseLayout>
+
+<script>
+  import '../scripts/lightbox.ts';
+</script>

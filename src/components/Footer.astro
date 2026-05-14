@@ -1,0 +1,65 @@
+---
+interface Props {
+  variant?: 'home' | 'contact' | 'minimal';
+}
+
+const { variant = 'home' } = Astro.props;
+
+const config = {
+  home: {
+    brand: 'Secil Gelinlik | Keşan',
+    slogan: 'Hayallerinizi süsleyen gelinlikler tasarlıyoruz.',
+    email: 'secil.gelinlik@gmail.com',
+    whatsappNumber: '905441786244',
+    copyright: '© 2025 Secil Gelinlik | Keşan',
+  },
+  contact: {
+    brand: 'Secil Gelinlik',
+    slogan: '10 yıldır hayallerinizi süsleyen gelinlikler tasarlıyoruz.',
+    email: 'info@gelinlik.com',
+    whatsappNumber: '905441726244',
+    copyright: '© 2025 Secil Gelinlik',
+  },
+};
+
+const cfg = variant === 'contact' ? config.contact : config.home;
+---
+
+{
+  variant === 'minimal' ? (
+    <footer class="site-footer">
+      <div class="container">
+        <p>© 2025 Secil Gelinlik | Keşan</p>
+      </div>
+    </footer>
+  ) : (
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-left">
+          <h3>{cfg.brand}</h3>
+          <p>{cfg.slogan}</p>
+        </div>
+        <div class="footer-right">
+          <p>İletişim:</p>
+          <p>{cfg.email} | +90 544 178 62 44</p>
+          <div class="social-icons">
+            <a href="https://www.instagram.com/secil_gelinlik_kesan/">
+              <img src="/images/instagram.png" alt="Instagram" />
+            </a>
+            <a href="https://www.facebook.com/secilgelinlikkesan/">
+              <img src="/images/facebook.png" alt="Facebook" />
+            </a>
+            <a
+              href={`https://wa.me/${cfg.whatsappNumber}?text=Merhaba%20randevu%20almak%20istiyorum`}
+              target="_blank"
+              class="whatsapp-float"
+            >
+              <img src="/images/whatsapp.png" alt="WhatsApp" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <p class="copyright">{cfg.copyright}</p>
+    </footer>
+  )
+}

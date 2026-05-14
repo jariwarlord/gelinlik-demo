@@ -1,0 +1,42 @@
+---
+interface CollectionItem {
+  src: string;
+  alt: string;
+  title: string;
+}
+
+interface Props {
+  title?: string;
+  items: CollectionItem[];
+  lightbox?: boolean;
+}
+
+const { title, items, lightbox = false } = Astro.props;
+---
+
+<section class="collection">
+  {title && <h2>{title}</h2>}
+  <div class="collection-gallery">
+    {
+      items.map((item) =>
+        lightbox ? (
+          <div class="col-item">
+            <a href={item.src} class="lightbox">
+              <img src={item.src} alt={item.alt} />
+            </a>
+            <div class="col-overlay">
+              <h3>{item.title}</h3>
+            </div>
+          </div>
+        ) : (
+          <div class="col-item">
+            <img src={item.src} alt={item.alt} />
+            <div class="col-overlay">
+              <h3>{item.title}</h3>
+            </div>
+          </div>
+        )
+      )
+    }
+  </div>
+</section>
