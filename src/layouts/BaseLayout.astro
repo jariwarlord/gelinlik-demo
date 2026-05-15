@@ -16,8 +16,7 @@ interface Props {
   twitterDescription?: string;
   twitterImage?: string;
   jsonLd?: object;
-  activeNav?: 'home' | 'gallery' | 'contact';
-  headerSubtitle?: string;
+  activeNav?: 'home' | 'gallery' | 'about' | 'contact';
   footerVariant?: 'home' | 'contact' | 'minimal';
 }
 
@@ -34,7 +33,6 @@ const {
   twitterImage,
   jsonLd,
   activeNav,
-  headerSubtitle,
   footerVariant = 'home',
 } = Astro.props;
 ---
@@ -82,7 +80,7 @@ const {
     </script>
   </head>
   <body>
-    <Header activeNav={activeNav} subtitle={headerSubtitle} />
+    <Header activeNav={activeNav} />
     <slot />
     <Footer variant={footerVariant} />
   </body>

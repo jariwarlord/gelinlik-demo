@@ -2,16 +2,62 @@
 interface Props {
   title: string;
   subtitle: string;
+  eyebrow?: string;
 }
 
-const { title, subtitle } = Astro.props;
+const { title, subtitle, eyebrow } = Astro.props;
 ---
 
-<section class="hero-contact">
-  <div class="hero-overlay"></div>
-  <div class="contact-card">
-    <h1>{title}</h1>
-    <p>{subtitle}</p>
-    <slot />
+<section class="py-20 md:py-28 bg-white">
+  <div class="max-w-content mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-20 items-start">
+      <div>
+        {eyebrow && <p class="font-script text-2xl text-brand mb-3">{eyebrow}</p>}
+        <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl text-fg leading-tight mb-6">
+          {title}
+        </h1>
+        <p class="text-fg-muted text-lg leading-relaxed mb-10 max-w-md">
+          {subtitle}
+        </p>
+
+        <div class="space-y-8 pt-10 border-t border-fg/10">
+          <div>
+            <p class="text-xs tracking-[0.2em] uppercase text-fg-subtle font-medium mb-2">
+              Telefon
+            </p>
+            <a
+              href="tel:+905441786244"
+              class="block text-fg hover:text-brand transition-colors text-lg"
+            >
+              +90 544 178 62 44
+            </a>
+          </div>
+          <div>
+            <p class="text-xs tracking-[0.2em] uppercase text-fg-subtle font-medium mb-2">
+              E-Posta
+            </p>
+            <a
+              href="mailto:secil.gelinlik@gmail.com"
+              class="block text-fg hover:text-brand transition-colors text-lg"
+            >
+              secil.gelinlik@gmail.com
+            </a>
+          </div>
+          <div>
+            <p class="text-xs tracking-[0.2em] uppercase text-fg-subtle font-medium mb-2">
+              Adres
+            </p>
+            <p class="text-fg">Keşan, Edirne</p>
+            <p class="text-fg-muted text-sm mt-1">
+              Pazartesi — Cumartesi · 10:00 — 20:00
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <slot />
+      </div>
+    </div>
   </div>
 </section>

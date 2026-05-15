@@ -1,0 +1,31 @@
+---
+interface Props {
+  src?: string;
+  title?: string;
+  eyebrow?: string;
+}
+
+const {
+  src = 'https://www.google.com/maps/embed?pb=!4v1715000000000!6m8!1m7!1s_!2m2!1d40.8542772!2d26.6317242!3f0!4f0!5f0.7820865974627469',
+  title = 'Mağazamız',
+  eyebrow = 'Bizi Ziyaret Edin',
+} = Astro.props;
+---
+
+<section class="bg-white pt-20 md:pt-24 pb-0">
+  <div class="max-w-content mx-auto px-6 mb-12 md:mb-16 text-center">
+    <p class="font-script text-2xl text-brand mb-3">{eyebrow}</p>
+    <h2 class="font-heading text-3xl md:text-4xl text-fg leading-tight">{title}</h2>
+  </div>
+  <div class="w-full aspect-[16/9] overflow-hidden bg-surface">
+    <iframe
+      src={src}
+      width="100%"
+      height="100%"
+      style="border:0; display:block;"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      allowfullscreen
+      title="Seçil Gelinlik Keşan Street View"></iframe>
+  </div>
+</section>

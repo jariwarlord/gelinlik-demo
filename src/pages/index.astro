@@ -2,11 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import FeaturedGallery from '../components/FeaturedGallery.astro';
-import CollectionGrid from '../components/CollectionGrid.astro';
+import CollectionCarousel from '../components/CollectionCarousel.astro';
 import InstagramSection from '../components/InstagramSection.astro';
 import GoogleReviews from '../components/GoogleReviews.astro';
 import MapSection from '../components/MapSection.astro';
-import AboutSection from '../components/AboutSection.astro';
 
 const featuredItems = [
   { src: '/images/1.jpg', alt: 'Gelinlik 1', title: 'Prenses Model', desc: 'Romantik ve zarif' },
@@ -76,16 +75,14 @@ const jsonLd = {
   twitterDescription="Hayalinizdeki gelinliği birlikte tasarlayalım."
   twitterImage="https://secilgelinlik.com/images/og-image.jpg"
   jsonLd={jsonLd}
-  headerSubtitle="Gelin Olmayı Tercih Edenlerin Adresi"
   footerVariant="home"
 >
   <Hero />
   <FeaturedGallery items={featuredItems} />
-  <CollectionGrid title="Koleksiyonumuz" items={collectionItems} />
-  <InstagramSection />
+  <CollectionCarousel eyebrow="Galeri" title="Koleksiyonumuz" items={collectionItems} />
   <GoogleReviews />
+  <InstagramSection />
   <MapSection />
-  <AboutSection />
 </BaseLayout>
 
 <script>

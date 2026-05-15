@@ -2,15 +2,20 @@
 interface Props {
   title: string;
   subtitle: string;
+  eyebrow?: string;
 }
 
-const { title, subtitle } = Astro.props;
+const { title, subtitle, eyebrow } = Astro.props;
 ---
 
-<section class="hero-gallery">
-  <div class="hero-overlay"></div>
-  <div class="hero-gallery-text">
-    <h1>{title}</h1>
-    <p>{subtitle}</p>
+<section class="py-20 md:py-28 bg-white border-b border-fg/5">
+  <div class="max-w-content mx-auto px-6 text-center">
+    {eyebrow && <p class="font-script text-2xl text-brand mb-3">{eyebrow}</p>}
+    <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl text-fg leading-tight mb-5">
+      {title}
+    </h1>
+    <p class="text-fg-muted text-base md:text-lg max-w-xl mx-auto leading-relaxed">
+      {subtitle}
+    </p>
   </div>
 </section>

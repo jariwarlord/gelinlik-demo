@@ -6,21 +6,113 @@ interface Props {
 const { whatsappNumber = '905441726244' } = Astro.props;
 ---
 
-<form id="whatsappForm" autocomplete="on" novalidate data-whatsapp={whatsappNumber}>
-  <div class="form-group">
-    <input type="text" id="name" name="name" required placeholder=" " />
-    <label for="name">Ad Soyad</label>
+<form
+  id="whatsappForm"
+  autocomplete="on"
+  novalidate
+  data-whatsapp={whatsappNumber}
+  class="space-y-2"
+>
+  <div class="wa-field">
+    <input
+      type="text"
+      id="name"
+      name="name"
+      required
+      placeholder=" "
+      class="wa-input"
+    />
+    <label for="name" class="wa-label">Ad Soyad</label>
   </div>
-  <div class="form-group">
-    <input type="tel" id="phone" name="phone" required placeholder=" " />
-    <label for="phone">Telefon</label>
+
+  <div class="wa-field">
+    <input
+      type="tel"
+      id="phone"
+      name="phone"
+      required
+      placeholder=" "
+      class="wa-input"
+    />
+    <label for="phone" class="wa-label">Telefon</label>
   </div>
-  <div class="form-group">
-    <textarea id="message" name="message" required placeholder=" "></textarea>
-    <label for="message">Mesaj</label>
+
+  <div class="wa-field">
+    <textarea
+      id="message"
+      name="message"
+      required
+      placeholder=" "
+      rows="4"
+      class="wa-input wa-textarea"></textarea>
+    <label for="message" class="wa-label">Mesaj</label>
   </div>
-  <button type="submit" class="btn">Gönder</button>
+
+  <button
+    type="submit"
+    class="mt-8 w-full px-8 py-4 bg-brand hover:bg-brand-hover text-white text-sm font-medium tracking-[0.15em] uppercase transition-colors"
+  >
+    WhatsApp ile Gönder
+  </button>
+
+  <p class="text-xs text-fg-subtle text-center pt-4 leading-relaxed">
+    Form gönderildikten sonra WhatsApp uygulamasında<br />
+    randevu talebiniz hazır olarak açılır.
+  </p>
 </form>
+
+<style>
+  .wa-field {
+    position: relative;
+    padding-top: 1.75rem;
+  }
+
+  .wa-input {
+    width: 100%;
+    padding: 0.625rem 0;
+    border: 0;
+    border-bottom: 1px solid #e8e8e8;
+    background: transparent;
+    color: #1a1a1a;
+    font-size: 1rem;
+    line-height: 1.5;
+    outline: none;
+    transition: border-color 0.3s ease;
+    font-family: inherit;
+  }
+
+  .wa-textarea {
+    resize: none;
+  }
+
+  .wa-input:focus {
+    border-bottom-color: #ff6b81;
+  }
+
+  .wa-label {
+    position: absolute;
+    top: 1.75rem;
+    left: 0;
+    color: #9a9a9a;
+    font-size: 1rem;
+    pointer-events: none;
+    transition: all 0.25s ease;
+  }
+
+  .wa-input:focus + .wa-label,
+  .wa-input:not(:placeholder-shown) + .wa-label {
+    top: 0;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #6b6b6b;
+    font-weight: 500;
+  }
+
+  .wa-input:focus + .wa-label {
+    color: #ff6b81;
+  }
+</style>
 
 <script>
   const form = document.getElementById('whatsappForm') as HTMLFormElement | null;

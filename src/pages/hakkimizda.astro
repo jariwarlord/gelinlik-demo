@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroGallery from '../components/HeroGallery.astro';
+import AboutSection from '../components/AboutSection.astro';
+---
+
+<BaseLayout
+  title="Hakkımızda | Seçil Gelinlik"
+  description="Seçil Gelinlik, 2022'den beri Keşan'da özel tasarım gelinlik ve abiye sunuyor. Hikâyemiz, vizyonumuz ve hizmet anlayışımız."
+  keywords="hakkımızda, Seçil Gelinlik, Keşan gelinlik, özel tasarım gelinlik, atölye"
+  activeNav="about"
+  footerVariant="home"
+>
+  <HeroGallery
+    eyebrow="Bizi Tanıyın"
+    title="Hikâyemiz"
+    subtitle="2022'den bu yana Keşan'da, her gelinin kendi hikâyesini yansıtması için tasarlanan koleksiyonlar."
+  />
+  <AboutSection />
+</BaseLayout>

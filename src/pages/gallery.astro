@@ -42,8 +42,12 @@ const items = Array.from({ length: 25 }, (_, i) => {
 ---
 
 <BaseLayout title="Koleksiyon | Secil Gelinlik" activeNav="gallery" footerVariant="minimal">
-  <HeroGallery title="Tüm Gelinlik Koleksiyonumuz" subtitle="Beğendiğiniz modeli seçin" />
-  <CollectionGrid title="Tüm Koleksiyon" items={items} lightbox={true} />
+  <HeroGallery
+    eyebrow="Koleksiyon"
+    title="Tüm Gelinlik Koleksiyonumuz"
+    subtitle="Beğendiğiniz modeli seçin — büyütmek için tıklayın, randevu için iletişime geçin."
+  />
+  <CollectionGrid items={items} lightbox={true} />
 </BaseLayout>
 
 <script>

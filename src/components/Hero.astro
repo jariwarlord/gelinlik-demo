@@ -1,37 +1,133 @@
-<section class="hero">
-  <div class="hero-overlay"></div>
-  <div class="hero-text">
-    <h1>Hayallerinizin Gelinliğini Keşfedin</h1>
-    <p>Özel günleriniz için zarafet ve şıklığı bir araya getiriyoruz.</p>
-    <a href="/gallery" class="btn">Koleksiyonu Gör</a> <br /><br />
-    <a href="/contact" class="btn btn-outline">Randevu Al</a>
+---
+const slides = [
+  '/images/1.jpg',
+  '/images/2.jpg',
+  '/images/3.jpg',
+  '/images/4.jpg',
+  '/images/5.jpg',
+];
+---
+
+<section class="hero-carousel relative min-h-[600px] md:min-h-screen overflow-hidden bg-ink">
+  <div class="absolute inset-0">
+    {
+      slides.map((src, i) => (
+        <div
+          class="hero-slide absolute inset-0 transition-opacity duration-[1200ms] ease-out"
+          data-index={i}
+          style={i === 0 ? 'opacity:1' : 'opacity:0'}
+        >
+          <img
+            src={src}
+            alt=""
+            loading={i === 0 ? 'eager' : 'lazy'}
+            class="hero-slide-img w-full h-full object-cover"
+          />
+          <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/70" />
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="relative h-full min-h-[600px] md:min-h-screen flex flex-col items-center justify-center text-center px-6 py-24">
+    <p class="font-script text-2xl md:text-3xl text-white/80 mb-3">Hayalleriniz</p>
+    <h1 class="font-heading text-5xl md:text-7xl lg:text-8xl text-white leading-[1.05] max-w-4xl mb-6">
+      Gelinliğin Hikâyesi
+    </h1>
+    <p class="text-base md:text-lg text-white/85 max-w-xl mb-10 leading-relaxed">
+      Özel günleriniz için zarafet ve şıklığı bir araya getiriyoruz.
+    </p>
+    <div class="flex flex-wrap items-center justify-center gap-3">
+      <a
+        href="/gallery"
+        class="px-8 py-4 bg-brand hover:bg-brand-hover text-white text-sm font-medium tracking-[0.15em] uppercase transition-colors"
+      >
+        Koleksiyonu Keşfet
+      </a>
+      <a
+        href="/contact"
+        class="px-8 py-4 border border-white/50 hover:bg-white/10 text-white text-sm font-medium tracking-[0.15em] uppercase transition-colors"
+      >
+        Randevu Al
+      </a>
+    </div>
+  </div>
+
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
+    {
+      slides.map((_, i) => (
+        <button
+          class="hero-dot h-1 bg-white/40 rounded-full transition-all duration-300"
+          data-index={i}
+          aria-label={`${i + 1}. slayt`}
+          style={i === 0 ? 'width:32px;background:white' : 'width:16px'}
+        />
+      ))
+    }
   </div>
 </section>
 
+<style>
+  .hero-slide-img {
+    animation: kenburns 10s ease-out infinite alternate;
+    will-change: transform;
+  }
+  @keyframes kenburns {
+    from {
+      transform: scale(1) translate(0, 0);
+    }
+    to {
+      transform: scale(1.08) translate(-1%, -1%);
+    }
+  }
+  .hero-dot.is-active {
+    width: 32px !important;
+    background: white !important;
+  }
+  .hero-dot:not(.is-active) {
+    width: 16px !important;
+    background: rgba(255, 255, 255, 0.4) !important;
+  }
+</style>
+
 <script>
-  const hero = document.querySelector('.hero') as HTMLElement | null;
-  const images = [
-    '/images/1.jpg',
-    '/images/2.jpg',
-    '/images/3.jpg',
-    '/images/4.jpg',
-    '/images/5.jpg',
-  ];
+  const slides = document.querySelectorAll<HTMLElement>('.hero-slide');
+  const dots = document.querySelectorAll<HTMLElement>('.hero-dot');
+  let current = 0;
+  let timer: ReturnType<typeof setInterval> | null = null;
 
-  if (hero) {
-    let index = 0;
-    hero.style.backgroundImage = `url(${images[index]})`;
-
-    setInterval(() => {
-      index = (index + 1) % images.length;
-      hero.style.backgroundImage = `url(${images[index]})`;
-    }, 5000);
-
-    window.addEventListener('scroll', () => {
-      if (window.innerWidth > 768) {
-        const scroll = window.scrollY;
-        hero.style.backgroundPositionY = -(scroll * 0.3) + 'px';
-      }
+  function setActive(index: number) {
+    slides.forEach((slide, i) => {
+      slide.style.opacity = i === index ? '1' : '0';
     });
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('is-active', i === index);
+    });
+    current = index;
+  }
+
+  function next() {
+    setActive((current + 1) % slides.length);
+  }
+
+  function start() {
+    timer = setInterval(next, 5500);
+  }
+
+  function reset() {
+    if (timer) clearInterval(timer);
+    start();
+  }
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      setActive(i);
+      reset();
+    });
+  });
+
+  if (slides.length > 0) {
+    setActive(0);
+    start();
   }
 </script>
