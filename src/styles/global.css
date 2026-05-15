@@ -31,11 +31,24 @@
   html {
     scroll-behavior: smooth;
   }
+  /* Lenis active: native smooth scroll'u devre dışı bırak (conflict'i önler) */
+  html.lenis-active {
+    scroll-behavior: auto;
+  }
+  html.lenis-active,
+  html.lenis-active body {
+    height: auto;
+  }
   body {
     font-family: var(--font-body);
     color: var(--color-fg);
     background: white;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 }
