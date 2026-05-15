@@ -1,4 +1,6 @@
 ---
+import { business } from '../data/business';
+
 interface Props {
   title: string;
   subtitle: string;
@@ -26,10 +28,10 @@ const { title, subtitle, eyebrow } = Astro.props;
               Telefon
             </p>
             <a
-              href="tel:+905441786244"
+              href={`tel:${business.phone}`}
               class="block text-fg hover:text-brand transition-colors text-lg"
             >
-              +90 544 178 62 44
+              {business.phoneDisplay}
             </a>
           </div>
           <div>
@@ -37,19 +39,19 @@ const { title, subtitle, eyebrow } = Astro.props;
               E-Posta
             </p>
             <a
-              href="mailto:secil.gelinlik@gmail.com"
+              href={`mailto:${business.email}`}
               class="block text-fg hover:text-brand transition-colors text-lg"
             >
-              secil.gelinlik@gmail.com
+              {business.email}
             </a>
           </div>
           <div>
             <p class="text-xs tracking-[0.2em] uppercase text-fg-subtle font-medium mb-2">
               Adres
             </p>
-            <p class="text-fg">Keşan, Edirne</p>
+            <p class="text-fg">{business.address.full}</p>
             <p class="text-fg-muted text-sm mt-1">
-              Pazartesi — Cumartesi · 10:00 — 20:00
+              Pazartesi — Cumartesi · {business.openingHours.opens} — {business.openingHours.closes}
             </p>
           </div>
         </div>

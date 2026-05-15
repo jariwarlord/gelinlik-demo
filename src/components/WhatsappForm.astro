@@ -1,9 +1,11 @@
 ---
+import { business } from '../data/business';
+
 interface Props {
   whatsappNumber?: string;
 }
 
-const { whatsappNumber = '905441726244' } = Astro.props;
+const { whatsappNumber = business.whatsapp } = Astro.props;
 ---
 
 <form
@@ -118,7 +120,7 @@ const { whatsappNumber = '905441726244' } = Astro.props;
   const form = document.getElementById('whatsappForm') as HTMLFormElement | null;
 
   if (form) {
-    const WA_NUMBER = form.dataset.whatsapp || '905441726244';
+    const WA_NUMBER = form.dataset.whatsapp || '905441786244';
     const encode = (str: string) => encodeURIComponent(str).replace(/%20/g, '%20');
 
     form.addEventListener('submit', (e) => {
