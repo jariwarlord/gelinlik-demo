@@ -6,6 +6,9 @@ import CollectionCarousel from '../components/CollectionCarousel.astro';
 import InstagramSection from '../components/InstagramSection.astro';
 import GoogleReviews from '../components/GoogleReviews.astro';
 import MapSection from '../components/MapSection.astro';
+import CitiesGrid from '../components/CitiesGrid.astro';
+import { localBusinessSchema } from '../lib/schema';
+import { cities } from '../data/cities';
 
 const featuredItems = [
   { src: '/images/1.jpg', alt: 'Gelinlik 1', title: 'Prenses Model', desc: 'Romantik ve zarif' },
@@ -24,43 +27,9 @@ const collectionItems = [
   { src: '/images/20.jpg', alt: 'Gelinlik 20', title: 'Dantelli Model' },
 ];
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: 'Seçil Gelinlik',
-  image: 'https://secilgelinlik.com/images/og-image.jpg',
-  '@id': 'https://secilgelinlik.com',
-  url: 'https://secilgelinlik.com',
-  telephone: '+90 544 178 62 44',
-  email: 'secil.gelinlik@gmail.com',
-  description:
-    "Seçil Gelinlik, Keşan'da özel tasarım gelinlik ve abiye modelleriyle kişiye özel hizmet sunar. 2022'den beri hayallerinizi süsleyen gelinlikler tasarlıyoruz.",
-  priceRange: '$$',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'Keşan, Edirne',
-    addressLocality: 'Keşan',
-    addressRegion: 'Edirne',
-    postalCode: '22880',
-    addressCountry: 'TR',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: 40.8527,
-    longitude: 26.6307,
-  },
-  openingHoursSpecification: {
-    '@type': 'OpeningHoursSpecification',
-    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-    opens: '10:00',
-    closes: '20:00',
-  },
-  sameAs: [
-    'https://www.instagram.com/secil_gelinlik_kesan/',
-    'https://www.facebook.com/secilgelinlikkesan/',
-    'https://wa.me/905441786244?text=Merhaba%20randevu%20almak%20istiyorum',
-  ],
-};
+const jsonLd = localBusinessSchema({
+  areaServed: ['Keşan', 'Edirne', 'Tekirdağ', 'Çorlu', 'Kırklareli', 'Lüleburgaz'],
+});
 ---
 
 <BaseLayout
@@ -81,6 +50,13 @@ const jsonLd = {
   <FeaturedGallery items={featuredItems} />
   <CollectionCarousel eyebrow="Galeri" title="Koleksiyonumuz" items={collectionItems} />
   <GoogleReviews />
+  <CitiesGrid
+    eyebrow="Bölge"
+    title="Hizmet Verdiğimiz Şehirler"
+    subtitle="Trakya'nın dört bir yanından gelin adayları için ücretsiz deneme randevusu."
+    cities={cities}
+    showHubLink={true}
+  />
   <InstagramSection />
   <MapSection />
 </BaseLayout>

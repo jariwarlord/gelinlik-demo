@@ -1,0 +1,39 @@
+---
+import type { CityServices } from '../data/cities';
+
+interface Props {
+  services: CityServices;
+  title?: string;
+  eyebrow?: string;
+}
+
+const { services, title = 'Hizmetlerimiz', eyebrow = 'Atölye' } = Astro.props;
+
+const items = [
+  { key: 'gelinlik', label: 'Gelinlik', body: services.gelinlik },
+  { key: 'abiye', label: 'Abiye', body: services.abiye },
+  { key: 'nisan', label: 'Nişan Elbisesi', body: services.nisan },
+  { key: 'ozelTasarim', label: 'Özel Tasarım', body: services.ozelTasarim },
+];
+---
+
+<section class="py-24 md:py-32 bg-surface">
+  <div class="max-w-content mx-auto px-6">
+    <div class="text-center mb-14 md:mb-20">
+      <p class="font-script text-2xl text-brand mb-3">{eyebrow}</p>
+      <h2 class="font-heading text-4xl md:text-5xl text-fg leading-tight">{title}</h2>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+      {
+        items.map((item) => (
+          <article class="bg-white p-8 border border-fg/5 hover:border-brand/30 transition-colors group">
+            <h3 class="font-heading text-2xl text-fg mb-4 leading-tight">{item.label}</h3>
+            <div class="h-px w-10 bg-brand mb-5 transition-all duration-300 group-hover:w-16" />
+            <p class="text-fg-muted text-sm leading-relaxed">{item.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

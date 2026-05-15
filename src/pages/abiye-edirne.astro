@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroGallery from '../components/HeroGallery.astro';
+import FeaturedGallery from '../components/FeaturedGallery.astro';
+import GoogleReviews from '../components/GoogleReviews.astro';
+import FAQAccordion from '../components/FAQAccordion.astro';
+import MapSection from '../components/MapSection.astro';
+import WhatsappForm from '../components/WhatsappForm.astro';
+import WhyUs from '../components/WhyUs.astro';
+import { business, whatsappLink } from '../data/business';
+import { categories } from '../data/categories';
+import {
+  localBusinessSchema,
+  breadcrumbSchema,
+  faqPageSchema,
+} from '../lib/schema';
+
+const cat = categories.find((c) => c.slug === 'abiye-edirne')!;
+
+const galleryItems = cat.galleryImages.map((src, idx) => ({
+  src,
+  alt: `${cat.cityName} abiye modelleri - ${idx + 1}`,
+  title: `Model ${idx + 1}`,
+  desc: '',
+}));
+
+const jsonLdArray = [
+  localBusinessSchema({
+    url: `/${cat.slug}`,
+    description: cat.metaDescription,
+    areaServed: [cat.cityName],
+  }),
+  breadcrumbSchema([
+    { name: 'Anasayfa', path: '/' },
+    { name: 'Trakya Gelinlik', path: '/trakya-gelinlik' },
+    { name: cat.h1, path: `/${cat.slug}` },
+  ]),
+  faqPageSchema(cat.faq),
+];
+---
+
+<BaseLayout
+  title={cat.metaTitle}
+  description={cat.metaDescription}
+  keywords="edirne abiye, abiye edirne, edirne özel tasarım abiye, anne abiyesi edirne, Seçil Gelinlik"
+  ogTitle={cat.h1}
+  ogDescription={cat.metaDescription}
+  jsonLdArray={jsonLdArray}
+  activeNav="gallery"
+>
+  <HeroGallery
+    eyebrow="Kategori"
+    title={cat.h1}
+    subtitle={cat.introHeadline}
+  />
+
+  <section class="py-20 md:py-24 bg-white">
+    <div class="max-w-3xl mx-auto px-6">
+      <p class="text-fg leading-relaxed text-base md:text-lg">{cat.introBody}</p>
+    </div>
+  </section>
+
+  <FeaturedGallery items={galleryItems.slice(0, 6)} />
+
+  <WhyUs />
+
+  <section class="py-24 md:py-32 bg-soft/30 border-t border-fg/5">
+    <div class="max-w-content mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-start">
+      <div>
+        <p class="font-script text-2xl text-brand mb-3">Randevu</p>
+        <h2 class="font-heading text-4xl md:text-5xl text-fg leading-tight mb-6">
+          {cat.cityName}'den Abiye İçin Randevu
+        </h2>
+        <p class="text-fg-muted text-base md:text-lg leading-relaxed mb-8">
+          Atölyemize ulaşımı kolay, ücretsiz deneme randevusu için yazın.
+        </p>
+        <div class="space-y-5 pt-6 border-t border-fg/10">
+          <a
+            href={whatsappLink(cat.whatsappPrompt)}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-3 text-fg hover:text-brand transition-colors group"
+          >
+            <span class="text-xs font-medium tracking-[0.2em] uppercase">WhatsApp ile Yaz</span>
+            <span class="h-px w-10 bg-current transition-all duration-300 group-hover:w-16"></span>
+          </a>
+          <a
+            href={`tel:${business.phone}`}
+            class="block text-fg hover:text-brand transition-colors text-lg"
+          >
+            {business.phoneDisplay}
+          </a>
+          <a
+            href={`/${cat.relatedCitySlug}`}
+            class="inline-flex items-center gap-3 text-fg hover:text-brand transition-colors group mt-4"
+          >
+            <span class="text-xs font-medium tracking-[0.2em] uppercase">
+              {cat.cityName} Gelinlik Sayfasına Git
+            </span>
+            <span class="h-px w-10 bg-current transition-all duration-300 group-hover:w-16"></span>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <WhatsappForm />
+      </div>
+    </div>
+  </section>
+
+  <GoogleReviews />
+
+  <FAQAccordion faq={cat.faq} />
+
+  <MapSection />
+</BaseLayout>

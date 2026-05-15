@@ -1,0 +1,52 @@
+---
+import { yearsActive } from '../data/business';
+
+interface Props {
+  title?: string;
+  eyebrow?: string;
+}
+
+const { title = 'Neden Seçil Gelinlik?', eyebrow = 'Hakkımızda' } = Astro.props;
+
+const items = [
+  {
+    title: '2022\'den Beri',
+    body: `${yearsActive()}+ yıllık deneyimimizle her gelin adayına özel bir tasarım süreci sunuyoruz.`,
+  },
+  {
+    title: 'Ücretsiz Randevu',
+    body: "İlk denemeniz tamamen ücretsiz. Atölyemizde size özel zaman ayırıyoruz.",
+  },
+  {
+    title: 'Özel Tasarım',
+    body: "Hayalinizdeki modeli sıfırdan birlikte çiziyor, ölçülerinize özel hayata geçiriyoruz.",
+  },
+  {
+    title: 'Trakya Geneli',
+    body: "Edirne, Tekirdağ, Çorlu, Kırklareli ve Lüleburgaz'dan gelin adayları bizi tercih ediyor.",
+  },
+];
+---
+
+<section class="py-24 md:py-32 bg-soft/30">
+  <div class="max-w-content mx-auto px-6">
+    <div class="text-center mb-14 md:mb-20">
+      <p class="font-script text-2xl text-brand mb-3">{eyebrow}</p>
+      <h2 class="font-heading text-4xl md:text-5xl text-fg leading-tight">{title}</h2>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
+      {
+        items.map((item, idx) => (
+          <div class="text-center md:text-left">
+            <p class="font-script text-3xl text-brand mb-4">0{idx + 1}</p>
+            <h3 class="font-heading text-xl md:text-2xl text-fg mb-3 leading-tight">
+              {item.title}
+            </h3>
+            <p class="text-fg-muted text-sm leading-relaxed">{item.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

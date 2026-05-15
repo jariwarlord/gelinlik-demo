@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroGallery from '../components/HeroGallery.astro';
+import CitiesGrid from '../components/CitiesGrid.astro';
+import WhyUs from '../components/WhyUs.astro';
+import GoogleReviews from '../components/GoogleReviews.astro';
+import WhatsappForm from '../components/WhatsappForm.astro';
+import MapSection from '../components/MapSection.astro';
+import { business, whatsappLink } from '../data/business';
+import { cities, cityServiceAreas } from '../data/cities';
+import { localBusinessSchema, breadcrumbSchema } from '../lib/schema';
+
+const jsonLdArray = [
+  localBusinessSchema({
+    url: '/trakya-gelinlik',
+    description:
+      "Trakya bölgesinin butik gelinlik atölyesi. Edirne, Tekirdağ, Çorlu, Kırklareli ve Lüleburgaz'dan gelin adaylarına özel tasarım gelinlik ve abiye.",
+    areaServed: cityServiceAreas,
+  }),
+  breadcrumbSchema([
+    { name: 'Anasayfa', path: '/' },
+    { name: 'Trakya Gelinlik', path: '/trakya-gelinlik' },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Trakya Gelinlik | Seçil Gelinlik — Bölgenin Butik Atölyesi"
+  description="Trakya'da gelinlik için butik atölye: Edirne, Tekirdağ, Çorlu, Kırklareli, Lüleburgaz ve Keşan'dan gelin adaylarına özel tasarım gelinlik ve abiye. Ücretsiz randevu."
+  keywords="trakya gelinlik, trakya gelinlik atölyesi, edirne tekirdağ kırklareli gelinlik, özel tasarım gelinlik trakya"
+  jsonLdArray={jsonLdArray}
+  activeNav="gallery"
+>
+  <HeroGallery
+    eyebrow="Bölgesel"
+    title="Trakya Gelinlik Atölyesi"
+    subtitle="Trakya'nın butik gelinlik adresi. Edirne'den Lüleburgaz'a, Çorlu'dan Kırklareli'ye — tüm bölge için özel tasarım gelinlik, abiye ve nişan elbisesi."
+  />
+
+  <section class="py-20 md:py-24 bg-white">
+    <div class="max-w-3xl mx-auto px-6">
+      <p class="text-fg leading-relaxed text-base md:text-lg">
+        Trakya'da butik gelinlik atölyesi sayısı oldukça sınırlıdır; çoğu gelin adayı standart koleksiyonların ötesine geçmek için İstanbul ya da Edirne merkeze yöneliyor. <strong>Seçil Gelinlik</strong>, 2022'den beri Keşan'daki atölyesinde Trakya'nın altı şehrindeki gelin adaylarına hizmet veriyor: Edirne, Tekirdağ, Çorlu, Kırklareli, Lüleburgaz ve Keşan. Hazır koleksiyondan seçim yapabileceğiniz gibi, hayalinizdeki modeli sıfırdan birlikte tasarlayıp ölçülerinize özel hayata geçirebiliyoruz. Şehir dışından geleceklere randevuları gün ortasına denk getirip, tek bir günde tüm denemeleri ve ölçü alımını tamamlayabilmenizi sağlıyoruz. Aşağıdaki şehirlerden hangisindeyseniz, kendi sayfanızdan ulaşım, randevu ve sürece dair tüm detayları görebilirsiniz.
+      </p>
+    </div>
+  </section>
+
+  <CitiesGrid
+    eyebrow="Şehirler"
+    title="Hizmet Verdiğimiz Trakya Şehirleri"
+    subtitle="Her şehir için ayrı sayfa: ulaşım, randevu süreci ve sıkça sorulan sorular."
+    cities={cities}
+  />
+
+  <WhyUs />
+
+  <GoogleReviews />
+
+  <section class="py-24 md:py-32 bg-soft/30 border-t border-fg/5">
+    <div class="max-w-content mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-start">
+      <div>
+        <p class="font-script text-2xl text-brand mb-3">Randevu</p>
+        <h2 class="font-heading text-4xl md:text-5xl text-fg leading-tight mb-6">
+          Trakya'dan Randevu Alın
+        </h2>
+        <p class="text-fg-muted text-base md:text-lg leading-relaxed mb-8">
+          Atölyemiz Keşan merkezde, Trakya'nın tüm şehirlerinden 2 saat içinde ulaşılabilir
+          mesafede. Randevu ücretsizdir.
+        </p>
+        <div class="space-y-5 pt-6 border-t border-fg/10">
+          <a
+            href={whatsappLink("Merhaba, Trakya'dan randevu almak istiyorum.")}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-3 text-fg hover:text-brand transition-colors group"
+          >
+            <span class="text-xs font-medium tracking-[0.2em] uppercase">WhatsApp ile Yaz</span>
+            <span class="h-px w-10 bg-current transition-all duration-300 group-hover:w-16"></span>
+          </a>
+          <a
+            href={`tel:${business.phone}`}
+            class="block text-fg hover:text-brand transition-colors text-lg"
+          >
+            {business.phoneDisplay}
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <WhatsappForm />
+      </div>
+    </div>
+  </section>
+
+  <MapSection />
+</BaseLayout>

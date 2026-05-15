@@ -1,0 +1,131 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import HeroGallery from '../components/HeroGallery.astro';
+import FeaturedGallery from '../components/FeaturedGallery.astro';
+import ServicesGrid from '../components/ServicesGrid.astro';
+import WhyUs from '../components/WhyUs.astro';
+import GoogleReviews from '../components/GoogleReviews.astro';
+import FAQAccordion from '../components/FAQAccordion.astro';
+import MapSection from '../components/MapSection.astro';
+import WhatsappForm from '../components/WhatsappForm.astro';
+import CitiesGrid from '../components/CitiesGrid.astro';
+import { business, whatsappLink } from '../data/business';
+import { cities, type City } from '../data/cities';
+import {
+  localBusinessSchema,
+  breadcrumbSchema,
+  faqPageSchema,
+} from '../lib/schema';
+
+interface Props {
+  city: City;
+}
+
+const { city } = Astro.props;
+
+const galleryItems = city.galleryImages.map((src, idx) => ({
+  src,
+  alt: `${city.name} gelinlik modelleri - ${idx + 1}`,
+  title: `Model ${idx + 1}`,
+  desc: '',
+}));
+
+const jsonLdArray = [
+  localBusinessSchema({
+    url: `/${city.slug}`,
+    description: city.metaDescription,
+    areaServed: [city.name],
+  }),
+  breadcrumbSchema([
+    { name: 'Anasayfa', path: '/' },
+    { name: 'Trakya Gelinlik', path: '/trakya-gelinlik' },
+    { name: `${city.name} Gelinlik`, path: `/${city.slug}` },
+  ]),
+  faqPageSchema(city.faq),
+];
+---
+
+<BaseLayout
+  title={city.metaTitle}
+  description={city.metaDescription}
+  keywords={`${city.name.toLowerCase()} gelinlik, ${city.name.toLowerCase()} abiye, ${city.name.toLowerCase()} nişan elbisesi, özel tasarım gelinlik, Seçil Gelinlik`}
+  ogTitle={`${city.name} Gelinlik | ${business.name}`}
+  ogDescription={city.metaDescription}
+  jsonLdArray={jsonLdArray}
+  activeNav="gallery"
+  footerVariant="home"
+>
+  <HeroGallery
+    eyebrow={city.region}
+    title={city.h1}
+    subtitle={city.introHeadline}
+  />
+
+  <section class="py-20 md:py-24 bg-white">
+    <div class="max-w-3xl mx-auto px-6">
+      <p class="text-fg leading-relaxed text-base md:text-lg">{city.introBody}</p>
+    </div>
+  </section>
+
+  <ServicesGrid services={city.services} />
+
+  <FeaturedGallery items={galleryItems.slice(0, 6)} />
+
+  <WhyUs />
+
+  <section class="py-24 md:py-32 bg-white border-t border-fg/5">
+    <div class="max-w-content mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-start">
+      <div>
+        <p class="font-script text-2xl text-brand mb-3">Randevu</p>
+        <h2 class="font-heading text-4xl md:text-5xl text-fg leading-tight mb-6">
+          {city.name}'den Randevu Alın
+        </h2>
+        <p class="text-fg-muted text-base md:text-lg leading-relaxed mb-8">
+          {city.distanceFromKesan}. Hayalinizdeki gelinliği birlikte tasarlayalım — randevu ücretsizdir.
+        </p>
+        <div class="space-y-5 pt-6 border-t border-fg/10">
+          <a
+            href={whatsappLink(`Merhaba, ${city.name}'den randevu almak istiyorum.`)}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-3 text-fg hover:text-brand transition-colors group"
+          >
+            <span class="text-xs font-medium tracking-[0.2em] uppercase">WhatsApp ile Yaz</span>
+            <span class="h-px w-10 bg-current transition-all duration-300 group-hover:w-16"></span>
+          </a>
+          <a
+            href={`tel:${business.phone}`}
+            class="block text-fg hover:text-brand transition-colors text-lg"
+          >
+            {business.phoneDisplay}
+          </a>
+          <a
+            href={`mailto:${business.email}`}
+            class="block text-fg hover:text-brand transition-colors text-base"
+          >
+            {business.email}
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <WhatsappForm />
+      </div>
+    </div>
+  </section>
+
+  <GoogleReviews />
+
+  <FAQAccordion faq={city.faq} />
+
+  <MapSection />
+
+  <CitiesGrid
+    eyebrow="Trakya"
+    title={`${city.name} Dışındaki Şehirler`}
+    subtitle="Atölyemize ulaşabileceğiniz diğer Trakya şehirleri."
+    cities={cities}
+    excludeSlug={city.slug}
+    showHubLink={true}
+  />
+</BaseLayout>
