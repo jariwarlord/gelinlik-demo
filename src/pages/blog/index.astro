@@ -1,0 +1,76 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroGallery from '../../components/HeroGallery.astro';
+import { breadcrumbSchema, organizationSchema } from '../../lib/schema';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+);
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString('tr-TR', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const jsonLdArray = [
+  organizationSchema(),
+  breadcrumbSchema([
+    { name: 'Anasayfa', path: '/' },
+    { name: 'Blog', path: '/blog' },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Blog | Seçil Gelinlik — Gelinlik ve Düğün Rehberi"
+  description="Gelinlik nasıl seçilir, nişan elbisesi renk önerileri, kiralama mı satın alma mı — düğün hazırlığı için pratik rehberler ve içerikler."
+  keywords="gelinlik blog, düğün rehberi, gelinlik seçimi, nişan elbisesi"
+  jsonLdArray={jsonLdArray}
+  activeNav="gallery"
+>
+  <HeroGallery
+    eyebrow="Rehber"
+    title="Blog"
+    subtitle="Gelinlik seçimi, nişan elbisesi ve düğün hazırlığı için pratik içerikler."
+  />
+
+  <section class="py-20 md:py-28 bg-white">
+    <div class="max-w-content mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+        {
+          posts.map((post) => (
+            <a
+              href={`/blog/${post.id}`}
+              class="group block bg-surface hover:bg-surface-2 border border-fg/5 hover:border-brand/40 transition-all overflow-hidden"
+            >
+              {post.data.heroImage && (
+                <div class="aspect-[4/3] overflow-hidden">
+                  <img
+                    src={post.data.heroImage}
+                    alt={post.data.title}
+                    loading="lazy"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+              )}
+              <div class="p-6 md:p-8">
+                <p class="text-xs tracking-[0.2em] uppercase text-fg-subtle font-medium mb-3">
+                  {formatDate(post.data.publishDate)}
+                </p>
+                <h2 class="font-heading text-xl md:text-2xl text-fg group-hover:text-brand transition-colors leading-tight mb-3">
+                  {post.data.title}
+                </h2>
+                <p class="text-fg-muted text-sm leading-relaxed">
+                  {post.data.excerpt ?? post.data.description}
+                </p>
+                <span class="inline-flex items-center gap-3 mt-5 text-fg group-hover:text-brand transition-colors">
+                  <span class="text-xs font-medium tracking-[0.2em] uppercase">Devamı</span>
+                  <span class="h-px w-10 bg-current transition-all duration-300 group-hover:w-16" />
+                </span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
