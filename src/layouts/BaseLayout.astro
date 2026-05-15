@@ -12,10 +12,14 @@ interface Props {
   ogDescription?: string;
   ogImage?: string;
   ogUrl?: string;
+  ogType?: 'website' | 'article';
   twitterTitle?: string;
   twitterDescription?: string;
   twitterImage?: string;
   jsonLd?: object;
+  jsonLdArray?: object[];
+  canonical?: string;
+  noindex?: boolean;
   activeNav?: 'home' | 'gallery' | 'about' | 'contact';
   footerVariant?: 'home' | 'contact' | 'minimal';
 }
@@ -28,10 +32,14 @@ const {
   ogDescription,
   ogImage,
   ogUrl,
+  ogType,
   twitterTitle,
   twitterDescription,
   twitterImage,
   jsonLd,
+  jsonLdArray,
+  canonical,
+  noindex,
   activeNav,
   footerVariant = 'home',
 } = Astro.props;
@@ -62,10 +70,14 @@ const {
       ogDescription={ogDescription}
       ogImage={ogImage}
       ogUrl={ogUrl}
+      ogType={ogType}
       twitterTitle={twitterTitle}
       twitterDescription={twitterDescription}
       twitterImage={twitterImage}
       jsonLd={jsonLd}
+      jsonLdArray={jsonLdArray}
+      canonical={canonical}
+      noindex={noindex}
     />
 
     <!-- Google tag (gtag.js) -->

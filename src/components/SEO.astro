@@ -1,4 +1,6 @@
 ---
+import { business } from '../data/business';
+
 interface Props {
   title: string;
   description?: string;
@@ -7,10 +9,14 @@ interface Props {
   ogDescription?: string;
   ogImage?: string;
   ogUrl?: string;
+  ogType?: 'website' | 'article';
   twitterTitle?: string;
   twitterDescription?: string;
   twitterImage?: string;
   jsonLd?: object;
+  jsonLdArray?: object[];
+  canonical?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -21,11 +27,32 @@ const {
   ogDescription,
   ogImage,
   ogUrl,
+  ogType = 'website',
   twitterTitle,
   twitterDescription,
   twitterImage,
   jsonLd,
+  jsonLdArray,
+  canonical,
+  noindex,
 } = Astro.props;
+
+const productionUrl = new URL(Astro.url.pathname, business.url).toString();
+const canonicalUrl = canonical ?? productionUrl;
+const finalOgUrl = ogUrl ?? productionUrl;
+const finalOgImage = ogImage ?? business.ogImage;
+const finalOgTitle = ogTitle ?? title;
+const finalOgDescription = ogDescription ?? description;
+const finalTwitterTitle = twitterTitle ?? finalOgTitle;
+const finalTwitterDescription = twitterDescription ?? finalOgDescription;
+const finalTwitterImage = twitterImage ?? finalOgImage;
+
+const isDemoEnv = import.meta.env.PUBLIC_IS_DEMO === 'true';
+const finalNoindex = noindex || isDemoEnv;
+
+const schemas: object[] = [];
+if (jsonLdArray && jsonLdArray.length > 0) schemas.push(...jsonLdArray);
+if (jsonLd) schemas.push(jsonLd);
 ---
 
 <title>{title}</title>
@@ -33,15 +60,25 @@ const {
 {keywords && <meta name="keywords" content={keywords} />}
 <meta name="theme-color" content="#ff6b81" />
 
-{ogTitle && <meta property="og:title" content={ogTitle} />}
-{ogDescription && <meta property="og:description" content={ogDescription} />}
-{ogImage && <meta property="og:image" content={ogImage} />}
-{ogUrl && <meta property="og:url" content={ogUrl} />}
-{ogTitle && <meta property="og:type" content="website" />}
+<link rel="canonical" href={canonicalUrl} />
 
-{twitterImage && <meta name="twitter:card" content="summary_large_image" />}
-{twitterTitle && <meta name="twitter:title" content={twitterTitle} />}
-{twitterDescription && <meta name="twitter:description" content={twitterDescription} />}
-{twitterImage && <meta name="twitter:image" content={twitterImage} />}
+{finalNoindex && <meta name="robots" content="noindex, nofollow" />}
 
-{jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+<meta property="og:title" content={finalOgTitle} />
+{finalOgDescription && <meta property="og:description" content={finalOgDescription} />}
+<meta property="og:image" content={finalOgImage} />
+<meta property="og:url" content={finalOgUrl} />
+<meta property="og:type" content={ogType} />
+<meta property="og:site_name" content={business.name} />
+<meta property="og:locale" content="tr_TR" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={finalTwitterTitle} />
+{finalTwitterDescription && <meta name="twitter:description" content={finalTwitterDescription} />}
+<meta name="twitter:image" content={finalTwitterImage} />
+
+{
+  schemas.map((schema) => (
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  ))
+}
