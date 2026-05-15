@@ -1,0 +1,97 @@
+---
+interface CollectionItem {
+  src: string;
+  alt: string;
+  title: string;
+}
+
+interface Props {
+  title?: string;
+  eyebrow?: string;
+  items: CollectionItem[];
+}
+
+const { title, eyebrow, items } = Astro.props;
+---
+
+<section class="py-24 md:py-32 bg-surface">
+  <div class="max-w-content mx-auto px-6">
+    <div class="flex items-end justify-between mb-12 md:mb-16">
+      <div>
+        {eyebrow && <p class="font-script text-2xl text-brand mb-3">{eyebrow}</p>}
+        {title && <h2 class="font-heading text-4xl md:text-5xl text-fg leading-tight">{title}</h2>}
+      </div>
+
+      <div class="hidden md:flex items-center gap-2">
+        <button
+          class="collection-prev w-12 h-12 rounded-full border border-fg/15 hover:border-fg hover:bg-fg hover:text-white text-fg transition-all flex items-center justify-center"
+          aria-label="Önceki"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <button
+          class="collection-next w-12 h-12 rounded-full border border-fg/15 hover:border-fg hover:bg-fg hover:text-white text-fg transition-all flex items-center justify-center"
+          aria-label="Sonraki"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M9 6l6 6-6 6" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="collection-track flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-6 scroll-smooth scrollbar-none px-6"
+  >
+    <div class="flex-shrink-0 w-0 md:w-[calc((100vw-1200px)/2)]" aria-hidden="true"></div>
+    {
+      items.map((item) => (
+        <article class="collection-item snap-start flex-shrink-0 w-[75vw] sm:w-[55vw] md:w-[340px] lg:w-[380px] group">
+          <a href={item.src} class="lightbox block relative aspect-[3/4] overflow-hidden bg-white">
+            <img
+              src={item.src}
+              alt={item.alt}
+              loading="lazy"
+              class="w-full h-full object-cover transition-transform duration-[800ms] ease-out group-hover:scale-[1.04]"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          </a>
+          <h3 class="mt-5 font-heading text-xl text-fg">{item.title}</h3>
+        </article>
+      ))
+    }
+    <div class="flex-shrink-0 w-0 md:w-[calc((100vw-1200px)/2)]" aria-hidden="true"></div>
+  </div>
+</section>
+
+<style>
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+</style>
+
+<script>
+  const track = document.querySelector<HTMLElement>('.collection-track');
+  const prev = document.querySelector<HTMLButtonElement>('.collection-prev');
+  const next = document.querySelector<HTMLButtonElement>('.collection-next');
+
+  function step(direction: 'prev' | 'next') {
+    if (!track) return;
+    const item = track.querySelector<HTMLElement>('.collection-item');
+    if (!item) return;
+    const itemWidth = item.offsetWidth + 24;
+    track.scrollBy({
+      left: direction === 'next' ? itemWidth : -itemWidth,
+      behavior: 'smooth',
+    });
+  }
+
+  prev?.addEventListener('click', () => step('prev'));
+  next?.addEventListener('click', () => step('next'));
+</script>

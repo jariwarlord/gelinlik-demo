@@ -1,0 +1,117 @@
+---
+interface Props {
+  activeNav?: 'home' | 'gallery' | 'about' | 'contact';
+}
+
+const { activeNav } = Astro.props;
+
+const links = [
+  { href: '/', label: 'Anasayfa', key: 'home' },
+  { href: '/gallery', label: 'Koleksiyon', key: 'gallery' },
+  { href: '/hakkimizda', label: 'Hakkımızda', key: 'about' },
+  { href: '/contact', label: 'Randevu', key: 'contact' },
+] as const;
+---
+
+<!-- Top announcement bar -->
+<div class="bg-ink text-white">
+  <div class="max-w-content mx-auto px-6 py-2.5 text-center">
+    <p class="font-heading italic text-sm tracking-wide text-white/90">
+      Gelin Olmayı Tercih Edenlerin Adresi
+    </p>
+  </div>
+</div>
+
+<!-- Frost-glass navigation -->
+<header class="sticky top-0 z-50 bg-white/75 backdrop-blur-md border-b border-black/5">
+  <div class="max-w-content mx-auto px-6 h-[72px] flex items-center justify-between">
+    <a href="/" class="font-script text-3xl text-brand leading-none transition-opacity hover:opacity-80">
+      Seçil Gelinlik
+    </a>
+
+    <nav class="hidden md:flex items-center gap-10">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              'relative text-xs tracking-[0.18em] uppercase font-medium transition-colors duration-200',
+              activeNav === link.key
+                ? 'text-brand'
+                : 'text-fg-muted hover:text-brand',
+            ]}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <button
+      class="hamburger-btn md:hidden flex flex-col gap-1.5 p-2 -mr-2"
+      aria-label="Menüyü Aç"
+      aria-expanded="false"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="hamburger-menu hidden md:hidden border-t border-black/5 bg-white">
+    <nav class="max-w-content mx-auto px-6 py-3">
+      <ul class="flex flex-col">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class:list={[
+                  'block py-3 text-sm tracking-[0.15em] uppercase font-medium transition-colors',
+                  activeNav === link.key
+                    ? 'text-brand'
+                    : 'text-fg hover:text-brand',
+                ]}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .hamburger-btn span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #0a0a0a;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+  }
+  .hamburger-btn.is-open span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger-btn.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger-btn.is-open span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+</style>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('.hamburger-btn');
+  const menu = document.querySelector<HTMLElement>('.hamburger-menu');
+
+  btn?.addEventListener('click', () => {
+    const isOpen = btn.classList.toggle('is-open');
+    menu?.classList.toggle('hidden');
+    btn.setAttribute('aria-expanded', String(isOpen));
+    btn.setAttribute('aria-label', isOpen ? 'Menüyü Kapat' : 'Menüyü Aç');
+  });
+</script>

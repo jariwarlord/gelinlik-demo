@@ -1,0 +1,63 @@
+---
+const reviews = [
+  {
+    name: 'Merve Kaya',
+    avatar:
+      'https://images.unsplash.com/photo-1701615004837-40d8573b6652?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D',
+    timeAgo: '3 ay önce',
+    body: 'İlgi ve alaka gerçekten harikaydı. Gelinliğim tam istediğim gibi oldu, herkese tavsiye ederim.',
+  },
+  {
+    name: 'Büşra Demir',
+    avatar:
+      'https://plus.unsplash.com/premium_photo-1691784781482-9af9bce05096?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzV8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D',
+    timeAgo: '6 ay önce',
+    body: 'Provalarda çok yardımcı oldular, en ufak detaya kadar ilgilendiler. Çok memnun kaldım, teşekkürler!',
+  },
+  {
+    name: 'Elif Yıldız',
+    avatar:
+      'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D',
+    timeAgo: '1 yıl önce',
+    body: 'Arkadaşımın tavsiyesiyle geldim. Hizmet çok profesyonel, gelinlik modelleri de çok çeşit. Kesinlikle güvenilir.',
+  },
+];
+---
+
+<section class="py-24 md:py-32 bg-surface">
+  <div class="max-w-content mx-auto px-6">
+    <div class="text-center mb-16 md:mb-20">
+      <p class="font-script text-2xl text-brand mb-3">Müşterilerimizden</p>
+      <h2 class="font-heading text-4xl md:text-5xl text-fg leading-tight">Yorumlar</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+      {
+        reviews.map((r) => (
+          <article class="bg-white p-8 md:p-10 flex flex-col">
+            <div class="flex gap-0.5 text-brand text-lg leading-none mb-6" aria-label="5 yıldız">
+              <span aria-hidden="true">★★★★★</span>
+            </div>
+            <blockquote class="font-heading text-lg md:text-xl text-fg leading-[1.55] mb-8 flex-grow">
+              <span class="text-brand text-2xl leading-none mr-1">"</span>
+              {r.body}
+              <span class="text-brand text-2xl leading-none ml-0.5">"</span>
+            </blockquote>
+            <div class="flex items-center gap-4 pt-6 border-t border-fg/10">
+              <img
+                src={r.avatar}
+                alt=""
+                loading="lazy"
+                class="w-12 h-12 rounded-full object-cover"
+              />
+              <div>
+                <p class="text-sm font-medium text-fg">{r.name}</p>
+                <p class="text-xs text-fg-subtle mt-0.5">{r.timeAgo}</p>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

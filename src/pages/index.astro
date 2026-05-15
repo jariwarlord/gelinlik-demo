@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import FeaturedGallery from '../components/FeaturedGallery.astro';
+import CollectionCarousel from '../components/CollectionCarousel.astro';
+import InstagramSection from '../components/InstagramSection.astro';
+import GoogleReviews from '../components/GoogleReviews.astro';
+import MapSection from '../components/MapSection.astro';
+
+const featuredItems = [
+  { src: '/images/1.jpg', alt: 'Gelinlik 1', title: 'Prenses Model', desc: 'Romantik ve zarif' },
+  { src: '/images/2.jpg', alt: 'Gelinlik 2', title: 'Modern Model', desc: 'Sade ve şık' },
+  { src: '/images/3.jpg', alt: 'Gelinlik 3', title: 'Klasik Model', desc: 'Zamansız güzellik' },
+];
+
+const collectionItems = [
+  { src: '/images/4.jpg', alt: 'Gelinlik 13', title: 'Romantik Model' },
+  { src: '/images/7.jpg', alt: 'Gelinlik 14', title: 'Prenses Model' },
+  { src: '/images/5.jpg', alt: 'Gelinlik 15', title: 'Modern Model' },
+  { src: '/images/16.jpg', alt: 'Gelinlik 16', title: 'Klasik Model' },
+  { src: '/images/17.jpg', alt: 'Gelinlik 17', title: 'Bohem Model' },
+  { src: '/images/18.jpg', alt: 'Gelinlik 18', title: 'Dantelli Model' },
+  { src: '/images/19.jpg', alt: 'Gelinlik 19', title: 'Dantelli Model' },
+  { src: '/images/20.jpg', alt: 'Gelinlik 20', title: 'Dantelli Model' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'Seçil Gelinlik',
+  image: 'https://secilgelinlik.com/images/og-image.jpg',
+  '@id': 'https://secilgelinlik.com',
+  url: 'https://secilgelinlik.com',
+  telephone: '+90 544 178 62 44',
+  email: 'secil.gelinlik@gmail.com',
+  description:
+    "Seçil Gelinlik, Keşan'da özel tasarım gelinlik ve abiye modelleriyle kişiye özel hizmet sunar. 2022'den beri hayallerinizi süsleyen gelinlikler tasarlıyoruz.",
+  priceRange: '$$',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Keşan, Edirne',
+    addressLocality: 'Keşan',
+    addressRegion: 'Edirne',
+    postalCode: '22880',
+    addressCountry: 'TR',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 40.8527,
+    longitude: 26.6307,
+  },
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    opens: '10:00',
+    closes: '20:00',
+  },
+  sameAs: [
+    'https://www.instagram.com/secil_gelinlik_kesan/',
+    'https://www.facebook.com/secilgelinlikkesan/',
+    'https://wa.me/905441786244?text=Merhaba%20randevu%20almak%20istiyorum',
+  ],
+};
+---
+
+<BaseLayout
+  title="Seçil Gelinlik | Özel Tasarım Gelinlik & Abiye - Keşan"
+  description="Seçil Gelinlik, 2022'den beri Keşan'da özel tasarım gelinlik ve abiye modelleri sunuyor. Hayalinizdeki gelinliği birlikte tasarlayalım."
+  keywords="gelinlik, abiye, özel tasarım gelinlik, Keşan gelinlik, düğün, nişan, Seçil Gelinlik"
+  ogTitle="Seçil Gelinlik | Özel Tasarım Gelinlik & Abiye"
+  ogDescription="Hayalinizdeki gelinliği birlikte tasarlayalım. 2022'den beri Keşan'da hizmetinizdeyiz."
+  ogImage="https://secilgelinlik.com/images/og-image.jpg"
+  ogUrl="https://secilgelinlik.com"
+  twitterTitle="Seçil Gelinlik | Özel Tasarım Gelinlik & Abiye"
+  twitterDescription="Hayalinizdeki gelinliği birlikte tasarlayalım."
+  twitterImage="https://secilgelinlik.com/images/og-image.jpg"
+  jsonLd={jsonLd}
+  footerVariant="home"
+>
+  <Hero />
+  <FeaturedGallery items={featuredItems} />
+  <CollectionCarousel eyebrow="Galeri" title="Koleksiyonumuz" items={collectionItems} />
+  <GoogleReviews />
+  <InstagramSection />
+  <MapSection />
+</BaseLayout>
+
+<script>
+  import '../scripts/lightbox.ts';
+</script>
